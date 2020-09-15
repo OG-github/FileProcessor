@@ -79,7 +79,7 @@ public class CommandFileProcessor {
             this.initializeValues();
             boolean orderNoSubSecFlag = false; // flag if sub-section order was missing
             int lineCounter = 0; // line count for the warnings
-            while ((line = commandReader.readLine()) != null) {
+            while ((line = commandReader.readLine()) != null) { // while line is not empty
                 lineCounter++;
                 if (this.lastSection.equals(ORDER)) {
                     if (line.equals(FILTER) || orderNoSubSecFlag) { // if last section was was missing order
@@ -93,10 +93,8 @@ public class CommandFileProcessor {
                             this.lastSection = FILTER;
 
                         }
-                        catch (Type1Exception err) {
-                            this.returnFiles = files;
-                            this.lastSection = FILTER;
-                            this.returnPrint.add(err.StringError() + lineCounter); // add err msg
+                        catch (Type1Exception err) { // bad command line for filter section
+                            filterCommandError(files, err, lineCounter);
                         }
                     }
                     else {
@@ -118,14 +116,8 @@ public class CommandFileProcessor {
                             }
                             this.returnFiles.clear();
                         }
-                        catch (Type1Exception err) {
-                            this.returnFiles = Abs.OrderFiles(this.returnFiles);
-                            this.lastSection = ORDER;
-                            this.returnPrint.add(err.StringError() + lineCounter);
-                            for (File file : this.returnFiles) {
-                                this.returnPrint.add(file.getName());
-                            }
-                            this.returnFiles.clear();
+                        catch (Type1Exception err) { // bad command line for order section
+                            orderCommandError(err, lineCounter);
                         }
                     }
                     else {
@@ -137,10 +129,19 @@ public class CommandFileProcessor {
                 throw new Type2ExceptionBadSectionName(); // missing ORDER (last line was empty)
             }
         }
-        catch (IOException io) {
-            throw new Type2ExceptionIO(); // if cant open the command file
+        catch (IOException io) { // if cant open or read the command file
+            throw new Type2ExceptionIO();
         }
         this.printReturnList(); // print the processing
+    }
+
+    /*----------------- Helpers---------------------------------------------------------------------------------------*/
+
+    /* Initializes the values for process method */
+    private void initializeValues() {
+        this.returnPrint.clear();
+        this.returnFiles.clear();
+        this.lastSection = ORDER; // pointer to which section we handled last
     }
 
     /* prints the returnList (i.e the the printing of files and warnings according to order) */
@@ -155,11 +156,20 @@ public class CommandFileProcessor {
         }
     }
 
-    /* Initializes the values for process method */
-    private void initializeValues() {
-        this.returnPrint.clear();
-        this.returnFiles.clear();
-        this.lastSection = ORDER; // pointer to which section we handled last
+    /* Helper function to catch an error if the filter command in the filter file was bad or with bad arguments. */
+    private void filterCommandError(Collection<File> files, Type1Exception err, int lineCounter) {
+        this.returnFiles = files;
+        this.lastSection = FILTER;
+        this.returnPrint.add(err.StringError() + lineCounter); // add err msg
     }
 
+    /* Helper function to catch an error if the order command in the filter file was bad or with bad arguments. */    private void orderCommandError(Type1Exception err, int lineCounter){
+        this.returnFiles = Abs.OrderFiles(this.returnFiles);
+        this.lastSection = ORDER;
+        this.returnPrint.add(err.StringError() + lineCounter); // add to err return print
+        for (File file : this.returnFiles) {
+            this.returnPrint.add(file.getName());
+        }
+        this.returnFiles.clear();
+    }
 }
