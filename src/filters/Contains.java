@@ -11,27 +11,12 @@ import java.util.Collection;
  */
 public class Contains extends Filter {
 
-    /*----------------- Fields ---------------------------------------------------------------------------------------*/
-
-    /* The files after they were filtered and ready to be returned.  */
-    private Collection<File> returnFiles = new ArrayList<File>();
-
-    /*----------------- Singleton ------------------------------------------------------------------------------------*/
-
-    /* The singleton */
-    private static final Contains containsFilter = new Contains();
-
-    /* Singleton constructor */
-    private Contains() {
-    }
+    /*----------------- Constructors ---------------------------------------------------------------------------------*/
 
     /**
-     * The only way to access the 1 instance of this class.
-     *
-     * @return The singleton of Contains.
+     * Generic constructor.
      */
-    public static final Contains instance() {
-        return containsFilter;
+    private Contains() {
     }
 
     /*----------------- Main Method ----------------------------------------------------------------------------------*/
@@ -44,13 +29,13 @@ public class Contains extends Filter {
      * @param phrase The String phrase to match within files' names.
      * @return Filtered Collection of files.
      */
-    public Collection<File> filterFiles(Collection<File> files, String phrase) {
-        this.returnFiles = new ArrayList<File>();
+    public static Collection<File> FilterFiles(Collection<File> files, String phrase) {
+        Collection<File> returnFiles = new ArrayList<File>();
         for (File singleFile : files) {
             if (singleFile.getName().contains(phrase)) {
-                this.returnFiles.add(singleFile);
+                returnFiles.add(singleFile);
             }
         }
-        return this.returnFiles;
+        return returnFiles;
     }
 }

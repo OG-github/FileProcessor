@@ -11,27 +11,12 @@ import java.util.Collection;
  */
 public class GreaterThan extends Filter {
 
-    /*----------------- Fields ---------------------------------------------------------------------------------------*/
-
-    /* The files after they were filtered and ready to be returned.  */
-    private Collection<File> returnFiles = new ArrayList<File>();
-
-    /*----------------- Singleton ------------------------------------------------------------------------------------*/
-
-    /* The singleton */
-    private static final GreaterThan greaterFilter = new GreaterThan();
-
-    /* Singleton constructor */
-    private GreaterThan() {
-    }
+    /*----------------- Constructors ---------------------------------------------------------------------------------*/
 
     /**
-     * The only way to access the 1 instance of this class.
-     *
-     * @return The singleton of GreaterThan.
+     * Generic constructor.
      */
-    public static final GreaterThan instance() {
-        return greaterFilter;
+    private GreaterThan() {
     }
 
     /*----------------- Main Method ----------------------------------------------------------------------------------*/
@@ -43,13 +28,13 @@ public class GreaterThan extends Filter {
      * @param sizeFilter Size in kilobytes.
      * @return Filtered Collection of files.
      */
-    public Collection<File> filterFiles(Collection<File> files, double sizeFilter) {
-        this.returnFiles = new ArrayList<File>();
+    public static Collection<File> FilterFiles(Collection<File> files, double sizeFilter) {
+        Collection<File> returnFiles = new ArrayList<File>();
         for (File singleFile : files) {
             if ((double) (singleFile.length() / Filter.KILO) > sizeFilter) { // turn the size to double kilobytes
-                this.returnFiles.add(singleFile);
+                returnFiles.add(singleFile);
             }
         }
-        return this.returnFiles;
+        return returnFiles;
     }
 }

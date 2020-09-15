@@ -12,27 +12,12 @@ import java.util.Collection;
  */
 public class Executable extends Filter {
 
-    /*----------------- Fields ---------------------------------------------------------------------------------------*/
-
-    /* The files after they were filtered and ready to be returned.  */
-    private Collection<File> returnFiles = new ArrayList<File>();
-
-    /*----------------- Singleton ------------------------------------------------------------------------------------*/
-
-    /* The singleton */
-    private static final Executable executableFilter = new Executable();
-
-    /* Singleton constructor */
-    private Executable() {
-    }
+    /*----------------- Constructors ---------------------------------------------------------------------------------*/
 
     /**
-     * The only way to access the 1 instance of this class.
-     *
-     * @return The singleton of Executable.
+     * Generic constructor.
      */
-    public static final Executable instance() {
-        return executableFilter;
+    private Executable() {
     }
 
     /*----------------- Main Method ----------------------------------------------------------------------------------*/
@@ -45,22 +30,22 @@ public class Executable extends Filter {
      * @param YesOrNo True (Yes) for returned executable files; False (No) for returned non-executable files.
      * @return Filtered Collection of files.
      */
-    public Collection<File> filterFiles(Collection<File> files, boolean YesOrNo) {
-        this.returnFiles = new ArrayList<File>();
+    public static Collection<File> FilterFiles(Collection<File> files, boolean YesOrNo) {
+        Collection<File> returnFiles = new ArrayList<File>();
         if (YesOrNo) {
             for (File singleFile : files) {
                 if (singleFile.canExecute()) {
-                    this.returnFiles.add(singleFile);
+                    returnFiles.add(singleFile);
                 }
             }
         }
         else {
             for (File singleFile : files) {
                 if (!singleFile.canExecute()) {
-                    this.returnFiles.add(singleFile);
+                    returnFiles.add(singleFile);
                 }
             }
         }
-        return this.returnFiles;
+        return returnFiles;
     }
 }

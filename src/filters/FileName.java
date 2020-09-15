@@ -12,27 +12,12 @@ import java.util.Collection;
  */
 public class FileName extends Filter {
 
-    /*----------------- Fields ---------------------------------------------------------------------------------------*/
-
-    /* The files after they were filtered and ready to be returned.  */
-    private Collection<File> returnFiles = new ArrayList<File>();
-
-    /*----------------- Singleton ------------------------------------------------------------------------------------*/
-
-    /* The singleton */
-    private static final FileName fileFilter = new FileName();
-
-    /* Singleton constructor */
-    private FileName() {
-    }
+    /*----------------- Constructors ---------------------------------------------------------------------------------*/
 
     /**
-     * The only way to access the 1 instance of this class.
-     *
-     * @return The singleton of FileName.
+     * Generic constructor.
      */
-    public static final FileName instance() {
-        return fileFilter;
+    private FileName() {
     }
 
     /*----------------- Main Method ----------------------------------------------------------------------------------*/
@@ -45,13 +30,13 @@ public class FileName extends Filter {
      * @param name  String name to match the files' names.
      * @return Filtered Collection of files.
      */
-    public Collection<File> filterFiles(Collection<File> files, String name) {
-        this.returnFiles = new ArrayList<File>();
+    public static Collection<File> FilterFiles(Collection<File> files, String name) {
+        Collection<File> returnFiles = new ArrayList<File>();
         for (File singleFile : files) {
             if (singleFile.getName().equals(name)) {
-                this.returnFiles.add(singleFile);
+                returnFiles.add(singleFile);
             }
         }
-        return this.returnFiles;
+        return returnFiles;
     }
 }

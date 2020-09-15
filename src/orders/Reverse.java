@@ -16,7 +16,7 @@ public class Reverse extends Order {
 
     public static Reverse instance(){ return REVERSEOrder;}
 
-    public ArrayList<File> orderFiles(ArrayList<File> files){
+    public static ArrayList<File> OrderFiles(ArrayList<File> files){
         ArrayList<File> returnFiles= new ArrayList<File>();
         for (int i = files.size() - 1; i >= 0; i--){
             returnFiles.add(files.get(i));

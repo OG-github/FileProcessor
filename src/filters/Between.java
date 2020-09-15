@@ -11,27 +11,12 @@ import java.util.Collection;
  */
 public class Between extends Filter {
 
-    /*----------------- Fields ---------------------------------------------------------------------------------------*/
-
-    /* The files after they were filtered and ready to be returned.  */
-    private Collection<File> returnFiles = new ArrayList<File>();
-
-    /*----------------- Singleton ------------------------------------------------------------------------------------*/
-
-    /* The singleton */
-    private static final Between betweenFilter = new Between();
-
-    /* Singleton constructor */
-    private Between() {
-    }
+    /*----------------- Constructors ---------------------------------------------------------------------------------*/
 
     /**
-     * The only way to access the 1 instance of this class.
-     *
-     * @return The singleton of Between.
+     * Generic constructor.
      */
-    public static final Between instance() {
-        return betweenFilter;
+    private Between() {
     }
 
     /*----------------- Main Method ----------------------------------------------------------------------------------*/
@@ -45,14 +30,14 @@ public class Between extends Filter {
      * @param higher Upper inclusive limit for file size in kilobytes.
      * @return Filtered Collection of files.
      */
-    public Collection<File> filterFiles(Collection<File> files, double lower, double higher) {
-        this.returnFiles = new ArrayList<File>();
+    public static Collection<File> FilterFiles(Collection<File> files, double lower, double higher) {
+        Collection<File> returnFiles = new ArrayList<File>();
         for (File singleFile : files) {
             double fileSize = (double) (singleFile.length() / Filter.KILO); // convert to kbytes
             if (fileSize >= lower && fileSize <= higher) {
-                this.returnFiles.add(singleFile);
+                returnFiles.add(singleFile);
             }
         }
-        return this.returnFiles;
+        return returnFiles;
     }
 }

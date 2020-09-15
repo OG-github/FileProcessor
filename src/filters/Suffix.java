@@ -11,27 +11,12 @@ import java.util.Collection;
  */
 public class Suffix extends Filter {
 
-    /*----------------- Fields ---------------------------------------------------------------------------------------*/
-
-    /* The files after they were filtered and ready to be returned.  */
-    private Collection<File> returnFiles = new ArrayList<File>();
-
-    /*----------------- Singleton ------------------------------------------------------------------------------------*/
-
-    /* The singleton */
-    private static final Suffix suffixFilter = new Suffix();
-
-    /* Singleton constructor */
-    private Suffix() {
-    }
+    /*----------------- Constructors ---------------------------------------------------------------------------------*/
 
     /**
-     * The only way to access the 1 instance of this class.
-     *
-     * @return The singleton of Suffix.
+     * Generic constructor.
      */
-    public static final Suffix instance() {
-        return suffixFilter;
+    private Suffix() {
     }
 
     /*----------------- Main Method ----------------------------------------------------------------------------------*/
@@ -43,13 +28,13 @@ public class Suffix extends Filter {
      * @param suffixString String of the suffix the files should have.
      * @return Filtered Collection of files.
      */
-    public Collection<File> filterFiles(Collection<File> files, String suffixString) {
-        this.returnFiles = new ArrayList<File>();
+    public static Collection<File> FilterFiles(Collection<File> files, String suffixString) {
+        Collection<File> returnFiles = new ArrayList<File>();
         for (File singleFile : files) {
             if (singleFile.getName().endsWith(suffixString)) {
-                this.returnFiles.add(singleFile);
+                returnFiles.add(singleFile);
             }
         }
-        return this.returnFiles;
+        return returnFiles;
     }
 }

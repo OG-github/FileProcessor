@@ -11,27 +11,12 @@ import java.util.Collection;
  */
 public class Writable extends Filter {
 
-    /*----------------- Fields ---------------------------------------------------------------------------------------*/
-
-    /* The files after they were filtered and ready to be returned.  */
-    private Collection<File> returnFiles = new ArrayList<File>();
-
-    /*----------------- Singleton ------------------------------------------------------------------------------------*/
-
-    /* The singleton */
-    private static final Writable writableFilter = new Writable();
-
-    /* Singleton constructor */
-    private Writable() {
-    }
+    /*----------------- Constructors ---------------------------------------------------------------------------------*/
 
     /**
-     * The only way to access the 1 instance of this class.
-     *
-     * @return The singleton of Hidden.
+     * Generic constructor.
      */
-    public static final Writable instance() {
-        return writableFilter;
+    private Writable() {
     }
 
     /*----------------- Main Method ----------------------------------------------------------------------------------*/
@@ -44,22 +29,22 @@ public class Writable extends Filter {
      * @param YesOrNo True (Yes) for returned writable files; False (No) for returned non-writable files.
      * @return Filtered Collection of files.
      */
-    public Collection<File> filterFiles(Collection<File> files, boolean YesOrNo) {
-        this.returnFiles = new ArrayList<File>();
+    public static Collection<File> FilterFiles(Collection<File> files, boolean YesOrNo) {
+        Collection<File> returnFiles = new ArrayList<File>();
         if (YesOrNo) {
             for (File singleFile : files) {
                 if (singleFile.canWrite()) {
-                    this.returnFiles.add(singleFile);
+                    returnFiles.add(singleFile);
                 }
             }
         }
         else {
             for (File singleFile : files) {
                 if (!singleFile.canWrite()) {
-                    this.returnFiles.add(singleFile);
+                    returnFiles.add(singleFile);
                 }
             }
         }
-        return this.returnFiles;
+        return returnFiles;
     }
 }
