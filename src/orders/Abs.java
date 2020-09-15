@@ -9,8 +9,7 @@ import java.util.Collection;
 import java.util.Comparator;
 
 /**
- * Orders files by name in an ascending order (case-sensitive). This method overrides compare implementation of
- * comparator to sort the files respectively.
+ * This class takes files and arranges them in an ascending order (case-sensitive).
  */
 public class Abs extends Order {
 
@@ -25,8 +24,10 @@ public class Abs extends Order {
     /*----------------- Main Method ----------------------------------------------------------------------------------*/
 
     /**
+     * Orders files by name in an ascending order (case-sensitive). This method overrides compare implementation of
+     * comparator to sort the files respectively.
      *
-     * @param files Collection of files to filter.
+     * @param files Collection of files to order.
      * @return Ordered Collection of files.
      */
     public static Collection<File> OrderFiles(Collection<File> files) {

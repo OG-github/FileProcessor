@@ -8,32 +8,31 @@ import java.util.Comparator;
 
 
 /**
- * This order takes a list of files and sorts them by size. If 2 files have the same size they will be
+ * This class takes a list of files and sorts them by size. If 2 files have the same size they will be
  * sorted according to name (ascending order).
  */
 public class Size extends Order {
 
-    private static Size sizeOrder = new Size();
+    /*----------------- Constructors ---------------------------------------------------------------------------------*/
 
-    private ArrayList<File> returnFiles = new ArrayList<File>();
-
+    /**
+     * Generic constructor.
+     */
     private Size() {
     }
 
-    public static Size instance() {
-        return sizeOrder;
-    }
+    /*----------------- Main Method ----------------------------------------------------------------------------------*/
 
     /**
      * Orders the files by making a comparator. Will sort by size, if 2 files are the same size will sort
      * by name. When sorting by name, all upper case names will be prioritized (ascending order) and will
      * show before the lower case starting files.
      *
-     * @param files The files to order
-     * @return The files in a sorted manner
+     * @param files Collection of files to order.
+     * @return Ordered Collection of files.
      */
     public static ArrayList<File> OrderFiles(ArrayList<File> files) {
-        returnFiles.clear();
+        ArrayList<File> returnFiles = new ArrayList<File>();
         File[] arrayFiles = new File[files.size()];
         arrayFiles = files.toArray(arrayFiles);
         Arrays.sort(arrayFiles, new Comparator<File>() {
