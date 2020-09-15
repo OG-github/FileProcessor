@@ -2,8 +2,8 @@ package orders;
 
 import java.io.File;
 import java.util.ArrayList;
-
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.Comparator;
 
 
@@ -31,8 +31,8 @@ public class Size extends Order {
      * @param files Collection of files to order.
      * @return Ordered Collection of files.
      */
-    public static ArrayList<File> OrderFiles(ArrayList<File> files) {
-        ArrayList<File> returnFiles = new ArrayList<File>();
+    public static Collection<File> OrderFiles(Collection<File> files) {
+        Collection<File> returnFiles = new ArrayList<File>();
         File[] arrayFiles = new File[files.size()];
         arrayFiles = files.toArray(arrayFiles);
         Arrays.sort(arrayFiles, new Comparator<File>() {

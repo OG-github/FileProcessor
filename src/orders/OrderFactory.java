@@ -49,26 +49,26 @@ public class OrderFactory {
     public Collection<File> orderFiles(Collection<File> files, String command) throws Type1Exception, Type2Exception {
         returnFiles.clear();
         if (command == null || command.isEmpty() || command.equals("FILTER")) {
-            returnFiles = Abs.instance().orderFiles(files);
+            returnFiles = Abs.OrderFiles(files);
             return returnFiles;
         }
         String[] commandLine = command.split(DELIMITER); // split by delimiter
         switch (commandLine[0]) {
             case "abs":
-                returnFiles = Abs.instance().orderFiles(files);
+                returnFiles = Abs.OrderFiles(files);
                 break;
             case "size":
-                returnFiles = Size.instance().orderFiles(files);
+                returnFiles = Size.OrderFiles(files);
                 break;
             case "type":
-                returnFiles = Type.instance().orderFiles(files);
+                returnFiles = Type.OrderFiles(files);
                 break;
             default:
                 throw new Type1Exception();
 
         }
         if (Arrays.asList(commandLine).contains("REVERSE")) {
-            this.returnFiles = Reverse.instance().orderFiles(this.returnFiles);
+            this.returnFiles = Reverse.OrderFiles(this.returnFiles);
         }
         return this.returnFiles;
     }

@@ -6,6 +6,7 @@ import java.io.*;
 import java.util.*;
 
 /**
+ * Main method is here.
  * This processor receives a source directory with files, and a text file of commands on the processing,
  * and prints the name of the files according to the filtering and ordering specified in the command file.
  * This class uses 1 main function to process the files and the command file. It catches Type2Exceptions

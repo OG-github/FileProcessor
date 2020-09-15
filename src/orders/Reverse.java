@@ -2,6 +2,7 @@ package orders;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Collection;
 
 
 /**
@@ -25,10 +26,11 @@ public class Reverse extends Order {
      * @param files Collection of files to order.
      * @return Ordered Collection of files.
      */
-    public static ArrayList<File> OrderFiles(ArrayList<File> files) {
-        ArrayList<File> returnFiles = new ArrayList<File>();
-        for (int i = files.size() - 1; i >= 0; i--) {
-            returnFiles.add(files.get(i));
+    public static Collection<File> OrderFiles(Collection<File> files) {
+        Collection<File> returnFiles = new ArrayList<File>();
+        ArrayList<File> arrFiles = new ArrayList<>(files); // arrlist from files
+        for (int i = arrFiles.size() - 1; i >= 0; i--) {
+            returnFiles.add(arrFiles.get(i));
         }
         return returnFiles;
     }

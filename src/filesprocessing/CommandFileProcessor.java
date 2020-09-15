@@ -21,11 +21,14 @@ public class CommandFileProcessor {
 
     /*----------------- CONSTANTS ------------------------------------------------------------------------------------*/
 
-    /* Represents the ORDER command in command file */
+    /* Represents the ORDER command in command file. */
     private static final String ORDER = "ORDER";
 
-    /* Represents the FILTER command in command file */
+    /* Represents the FILTER command in command file. */
     private static final String FILTER = "FILTER";
+
+    /* Represents the warning message printed in the results. */
+    private static final String WARNING = "Warning";
 
     /*----------------- Fields ---------------------------------------------------------------------------------------*/
 
@@ -116,7 +119,7 @@ public class CommandFileProcessor {
                             this.returnFiles.clear();
                         }
                         catch (Type1Exception err) {
-                            this.returnFiles = Abs.instance().orderFiles(this.returnFiles);
+                            this.returnFiles = Abs.OrderFiles(this.returnFiles);
                             this.lastSection = ORDER;
                             this.returnPrint.add(err.StringError() + lineCounter);
                             for (File file : this.returnFiles) {
@@ -143,7 +146,7 @@ public class CommandFileProcessor {
     /* prints the returnList (i.e the the printing of files and warnings according to order) */
     private void printReturnList() {
         for (String msg : this.returnPrint) { // print accordingly
-            if (msg.contains("Warning")) {
+            if (msg.contains(WARNING)) {
                 System.err.println(msg);
             }
             else {
