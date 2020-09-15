@@ -1,0 +1,122 @@
+Ofek Gadot
+ofekgadot@gmail.com
+
+=============================
+=	FileProcessor         =
+=============================
+
+This is a small core Java project that uses some of Java's features and some OOP designs. FileProcessor essentially filters and orders a directory of files to a specific demand supplied by a filter file. 
+This project receives in the arguments of main a path to a source directory with the files that need to be processed and a path to a filter file. The files name will be printed in console along with warnings or errors. 
+
+=============================
+=	Getting Started       =
+=============================
+
+These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
+
+=============================
+=	Prerequisites         =
+=============================
+
+Java 8 (and above) JRE or JDK. Test files and filters are included in the project directory.
+
+=============================
+=	Installing            =
+=============================
+
+Follow the following steps:
+
+Step 1: Go to https://github.com/OG-github/FileProcessor 
+
+A) Download the code to your computer ==========SEE HOW SEE HOW========
+
+
+
+A step by step series of examples that tell you how to get a development env running
+
+Say what the step will be
+
+Give the example
+
+And repeat
+
+until finished
+
+End with an example of getting some data out of the system or using it for a little demo
+
+=============================
+=	Running the tests     =
+=============================
+
+Explain how to run the automated tests for this system
+
+
+=   Break down into end to end tests    
+
+Explain what these tests test and why
+
+Give an example
+
+=   And coding style tests
+
+Explain what these tests test and why
+
+Give an example
+
+=============================
+=	Deployment            =
+=============================
+
+Add additional notes about how to deploy this on a live system
+
+=============================
+=	Built With            =
+=============================
+
+    Dropwizard - The web framework used
+    Maven - Dependency Management
+    ROME - Used to generate RSS Feeds
+
+
+=============================
+=	Contributing          =
+=============================
+
+Please read CONTRIBUTING.md for details on our code of conduct, and the process for submitting pull requests to us.
+
+
+=============================
+=	Versioning            =
+=============================
+
+We use SemVer for versioning. For the versions available, see the tags on this repository.
+
+=============================
+=	Authors               =
+=============================
+
+    Billie Thompson - Initial work - PurpleBooth
+
+See also the list of contributors who participated in this project.
+
+=============================
+=	License               =
+=============================
+
+This project is licensed under the MIT License - see the LICENSE.md file for details
+
+=============================
+=	Acknowledgments       =
+=============================
+
+    Hat tip to anyone whose code was used
+    Inspiration
+    etc
+
+
+
+.\testers_orders_filters\advanced_source_directory
+
+.\testers_orders_filters\advanced_filters\filterXXX.flt
+
+.\testers_orders_filters\advanced_source_directory .\testers_orders_filters\advanced_filters\filterXXX.flt
