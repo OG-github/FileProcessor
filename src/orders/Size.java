@@ -32,7 +32,7 @@ public class Size extends Order {
      * @param files The files to order
      * @return The files in a sorted manner
      */
-    public ArrayList<File> orderFiles(ArrayList<File> files) {
+    public static ArrayList<File> OrderFiles(ArrayList<File> files) {
         returnFiles.clear();
         File[] arrayFiles = new File[files.size()];
         arrayFiles = files.toArray(arrayFiles);

@@ -8,7 +8,7 @@ import java.util.Collection;
 
 import filters.*;
 import orders.Abs;
-import orders.orderFactory;
+import orders.OrderFactory;
 
 /**
  * This is the main handler of the processing. This class calls 2 other major classes to help,
@@ -108,7 +108,7 @@ public class CommandFileProcessor {
                             if (line != null && line.equals(FILTER)) {
                                 orderNoSubSecFlag = true; // raise the flag if no sub sec for order
                             }
-                            this.returnFiles = orderFactory.instance().orderFiles(this.returnFiles, line); // order
+                            this.returnFiles = OrderFactory.instance().orderFiles(this.returnFiles, line); // order
                             this.lastSection = ORDER;
                             for (File file : this.returnFiles) {
                                 this.returnPrint.add(file.getName()); // add all the files needed printing

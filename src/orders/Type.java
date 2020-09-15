@@ -20,7 +20,7 @@ public class Type extends Order {
     public static Type instance(){ return typeOrder;}
 
 
-    public ArrayList<File> orderFiles(ArrayList<File> files) {
+    public static ArrayList<File> OrderFiles(ArrayList<File> files) {
         returnFiles.clear();
         File[] filesArray = files.toArray(new File[files.size()]);
         Arrays.sort(filesArray, new Comparator<File>() {

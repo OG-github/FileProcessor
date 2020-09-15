@@ -12,29 +12,14 @@ import java.util.List;
  * files and one for the filtered files and the returned files will be the original list of files without the
  * filtered files. This filter essentially filters the NOT condition of any filter.
  */
-public class NOT extends Filter {
+public class Not extends Filter {
 
-    /*----------------- Fields ---------------------------------------------------------------------------------------*/
-
-    /* The files after they were filtered and ready to be returned.  */
-    private Collection<File> returnFiles = new ArrayList<File>();
-
-    /*----------------- Singleton ------------------------------------------------------------------------------------*/
-
-    /* The singleton */
-    private static final NOT NOTFilter = new NOT();
-
-    /* Singleton constructor */
-    private NOT() {
-    }
+    /*----------------- Constructors ---------------------------------------------------------------------------------*/
 
     /**
-     * The only way to access the 1 instance of this class.
-     *
-     * @return The singleton of NOT.
+     * Generic constructor.
      */
-    public static final NOT instance() {
-        return NOTFilter;
+    private Not() {
     }
 
     /*----------------- Main Method ----------------------------------------------------------------------------------*/
@@ -48,14 +33,14 @@ public class NOT extends Filter {
      * @param filteredFiles The List of files we want to exclude.
      * @return Filtered Collection of files.
      */
-    public Collection<File> filterFiles(Collection<File> allFiles, Collection<File> filteredFiles) {
-        this.returnFiles = new ArrayList<File>();
+    public static Collection<File> FilterFiles(Collection<File> allFiles, Collection<File> filteredFiles) {
+        Collection<File> returnFiles = new ArrayList<File>();
         for (File singleFile : allFiles) {
             if (!filteredFiles.contains(singleFile)) {
-                this.returnFiles.add(singleFile);
+                returnFiles.add(singleFile);
             }
         }
-        return this.returnFiles;
+        return returnFiles;
     }
 
 }

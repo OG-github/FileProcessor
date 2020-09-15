@@ -11,27 +11,12 @@ import java.util.Collection;
  */
 public class Prefix extends Filter {
 
-    /*----------------- Fields ---------------------------------------------------------------------------------------*/
-
-    /* The files after they were filtered and ready to be returned.  */
-    private Collection<File> returnFiles = new ArrayList<File>();
-
-    /*----------------- Singleton ------------------------------------------------------------------------------------*/
-
-    /* The singleton */
-    private static final Prefix prefixFilter = new Prefix();
-
-    /* Singleton constructor */
-    private Prefix() {
-    }
+    /*----------------- Constructors ---------------------------------------------------------------------------------*/
 
     /**
-     * The only way to access the 1 instance of this class.
-     *
-     * @return The singleton of Prefix.
+     * Generic constructor.
      */
-    public static final Prefix instance() {
-        return prefixFilter;
+    private Prefix() {
     }
 
     /*----------------- Main Method ----------------------------------------------------------------------------------*/
@@ -43,13 +28,13 @@ public class Prefix extends Filter {
      * @param prefixString String of the prefix the files should have.
      * @return Filtered Collection of files.
      */
-    public Collection<File> filterFiles(Collection<File> files, String prefixString) {
-        this.returnFiles = new ArrayList<File>();
+    public static Collection<File> FilterFiles(Collection<File> files, String prefixString) {
+        Collection<File> returnFiles = new ArrayList<File>();
         for (File singleFile : files) {
             if (singleFile.getName().startsWith(prefixString)) {
-                this.returnFiles.add(singleFile);
+                returnFiles.add(singleFile);
             }
         }
-        return this.returnFiles;
+        return returnFiles;
     }
 }

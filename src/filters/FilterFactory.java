@@ -6,6 +6,7 @@ import filesprocessing.Type1Exception;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 
 /**
@@ -151,22 +152,22 @@ public class FilterFactory {
 
             case FILE:
                 String name = commandLine[CMD_1]; // name to search
-                this.returnFiles = FileName.instance().filterFiles(files, name);
+                this.returnFiles = FileName.FilterFiles(files, name);
                 break;
 
             case CONTAINS:
                 String contain = commandLine[CMD_1]; // phrase to search
-                this.returnFiles = Contains.instance().filterFiles(files, contain);
+                this.returnFiles = Contains.FilterFiles(files, contain);
                 break;
 
             case PREFIX:
                 String pre = commandLine[CMD_1]; // prefix to search
-                this.returnFiles = Prefix.instance().filterFiles(files, pre);
+                this.returnFiles = Prefix.FilterFiles(files, pre);
                 break;
 
             case SUFFIX:
                 String suff = commandLine[CMD_1]; // suffix to search
-                this.returnFiles = Suffix.instance().filterFiles(files, suff);
+                this.returnFiles = Suffix.FilterFiles(files, suff);
                 break;
 
             case WRITABLE:
@@ -182,22 +183,16 @@ public class FilterFactory {
                 break;
 
             case ALL:
-                this.returnFiles = All.instance().filterFiles(files);
+                this.returnFiles = All.FilterFiles(files);
                 break;
 
             default:
                 throw new Type1Exception(); // throw error if not recognizable
         }
 
-        for (String str : commandLine) { // if #NOT
-            if (str.equals(NOT)) {
-                //this.returnFiles = filters.NOT.instance().filterFiles(files, this.returnFiles);
-                ArrayList<File> allFiles = new ArrayList<>(files); // shallow copy with new ArrayList
-                for (File file : this.returnFiles) {
-                    allFiles.remove(file); // TODO TODO TODO: finish this segment of NOT. make sure not double loops.
-                    // and delete not filter and fix abs filter
-                }
-            }
+        Collection<String> cmdLinesArrList = Arrays.asList(commandLine);
+        if (cmdLinesArrList.contains(NOT)) {
+            this.returnFiles = Not.FilterFiles(files, this.returnFiles);
         }
 
         return new ArrayList<>(this.returnFiles); // shallow copy with new ArrayList
@@ -217,7 +212,7 @@ public class FilterFactory {
         if (greater < ZERO_D) {
             throw new Type1Exception();
         } // check valid input
-        this.returnFiles = GreaterThan.instance().filterFiles(files, greater);
+        this.returnFiles = GreaterThan.FilterFiles(files, greater);
     }
 
     /**
@@ -233,7 +228,7 @@ public class FilterFactory {
         if (lower < ZERO_D || upper < ZERO_D || lower > upper) { // correct values for between
             throw new Type1Exception();
         } // check valid input
-        this.returnFiles = Between.instance().filterFiles(files, lower, upper);
+        this.returnFiles = Between.FilterFiles(files, lower, upper);
     }
 
     /**
@@ -248,7 +243,7 @@ public class FilterFactory {
         if (smaller < ZERO_D) {
             throw new Type1Exception();
         }
-        this.returnFiles = SmallerThan.instance().filterFiles(files, smaller);
+        this.returnFiles = SmallerThan.FilterFiles(files, smaller);
     }
 
     /**
@@ -261,10 +256,10 @@ public class FilterFactory {
     private void writable(Collection<File> files, String[] commandLine) throws Type1Exception {
         String YesNoW = commandLine[CMD_1];
         if (YesNoW.equals(YES)) {
-            this.returnFiles = Writable.instance().filterFiles(files, WRITABLE_YES); // writable
+            this.returnFiles = Writable.FilterFiles(files, WRITABLE_YES); // writable
         }
         else if (YesNoW.equals(NO)) {
-            this.returnFiles = Writable.instance().filterFiles(files, WRITABLE_NO); // non-writable
+            this.returnFiles = Writable.FilterFiles(files, WRITABLE_NO); // non-writable
         }
         else { // invalid YES NO
             throw new Type1Exception();
@@ -281,10 +276,10 @@ public class FilterFactory {
     private void executable(Collection<File> files, String[] commandLine) throws Type1Exception {
         String YesNoE = commandLine[CMD_1];
         if (YesNoE.equals(YES)) {
-            this.returnFiles = Executable.instance().filterFiles(files, EXECUTABLE_YES); // executable
+            this.returnFiles = Executable.FilterFiles(files, EXECUTABLE_YES); // executable
         }
         else if (YesNoE.equals(NO)) {
-            this.returnFiles = Executable.instance().filterFiles(files, EXECUTABLE_NO); // non-executable
+            this.returnFiles = Executable.FilterFiles(files, EXECUTABLE_NO); // non-executable
         }
         else { // invalid YES NO
             throw new Type1Exception();
@@ -301,10 +296,10 @@ public class FilterFactory {
     private void hidden(Collection<File> files, String[] commandLine) throws Type1Exception {
         String YesNoH = commandLine[CMD_1];
         if (YesNoH.equals(YES)) {
-            this.returnFiles = Hidden.instance().filterFiles(files, HIDDEN_YES); // hidden
+            this.returnFiles = Hidden.FilterFiles(files, HIDDEN_YES); // hidden
         }
         else if (YesNoH.equals(NO)) {
-            this.returnFiles = Hidden.instance().filterFiles(files, HIDDEN_NO); // non-hidden
+            this.returnFiles = Hidden.FilterFiles(files, HIDDEN_NO); // non-hidden
         }
         else {
             throw new Type1Exception();
